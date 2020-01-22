@@ -98,7 +98,7 @@ def is_three_of_a_kind?(hand_array)
     sorted_values = sorted_hand_values(hand_array)
 
     #determine if cards make up a three of a kind
-    if sorted_values[0] == sorted_values[2]
+    if sorted_values.uniq.length == 1
         return true
     else
         return false
@@ -122,8 +122,8 @@ def hand_value(hand_array)
     hand_type = ''
     high_card = sorted_hand_values(hand_array)[2]
 
-    if is_flush(hand_array)
-        
+#    if is_flush(hand_array)
+
 
 
 
