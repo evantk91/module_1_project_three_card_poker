@@ -46,6 +46,13 @@ purse -= ante
 puts " "
 puts "How much would you like to bet on Pair Plus?"
 pair_plus = gets.chomp.to_i
+if pair_plus > purse
+    puts "You don't have enough money for that! Enter a value less than $#{purse}:"
+    pair_plus = gets.chomp.to_i
+elsif pair_plus < 0
+    puts "You can't bet negative money!"
+    pair_plus = gets.chomp.to_i
+end
 purse -= pair_plus
 puts " "
 puts "Your remaining purse is now $#{purse}!"
