@@ -37,9 +37,11 @@ system "clear"
 deck = Deck.new('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
 deck_id = deck.deck_id
 
+players_hand = ['6S', '6D', '3H']#deck.deal_from_deck(deck_id)
+dealers_hand = ['6C', '6H', 'KD']#deck.deal_from_deck(deck_id)
 
-players_hand = deck.deal_from_deck(deck_id);
-dealers_hand = deck.deal_from_deck(deck_id);
+players_hand_type = hand_value(players_hand)[0]
+pp_payout = pair_plus_payout(pair_plus_bet, players_hand_type)
 
 puts "Current Purse: $#{user.purse} \n\n"
 puts "Your Hand: \n\n"
@@ -47,59 +49,42 @@ user.show_hand(players_hand)
 puts "\n"
 puts "Would you like to play or fold (type p for play, f for fold)"
 play_fold = gets.chomp.downcase
+system "clear"
 
+if play_fold == 'f'
+    user.purse += pp_payout
 
-#play_res = gets.chomp.downcase
-#if play_res == 'fold'
-    #code for showing dealer_hand
- #   purse -= ante
- #   puts " "
- #   puts "Dealer's hand: #{dealers_hand}"
- #   puts " "
- #   puts " "
-#elsif play_res == 'play'
- #   play = ante
- #   player_compare = players_hand.max
- #   dealer_compare = dealers_hand.max
- #   if is_pair(players_hand)
- #       player_compare = 15
- #   elsif is_flush(players_hand)
- #       player_compare = 16
- #   elsif is_straight?(players_hand)
- #       player_compare = 17
- #   elsif three_of_a_kind(players_hand)
- #       player_compare = 18
- #   elsif is_straight(players_hand) && is_flush(players_hand)
- #       player_compare = 19
- #   end
- #   if hand_type(dealer_hand) = "pair"
- #       dealer_compare = 15
- #   elsif is_flush(dealers_hand)
- #       dealer_compare = 16
- #   elsif is_straight?(dealers_hand)
- #       dealer_compare = 17
- #   elsif three_of_a_kind(dealers_hand)
- #       dealer_compare = 18
- #   elsif is_straight(dealers_hand) && is_flush(dealers_hand)
- #       dealer_compare = 19
- #   end
+    puts "Current Purse: $#{user.purse} \n\n"
+    puts "Your Hand: \n\n"
+    user.show_hand(players_hand)
+    puts "\n"
 
-#end
-    #code for showing dealer_hand
-    #compare player_hand.value with deal_hand.value
-    #if ph_value > dh.value
-        #purse += (ante + play)
-    #elsif ph_value < dh.value
-        #purse -= ante
-    #else if ph.max > dh.max
-            #purse += (ante + play)
-        #elsof ph.max < dh.max
-            #purse -= ante
-        #else puts "Draw!"
-        #end
-    #end
+elsif play_fold == 'p'
+    play = ante
+    #subtract play bet from purse
+    user.purse -= play
+    #pays out pair plus bonus
+    user.purse += pp_payout
+    #compares dealer hand and player hand
+    if player_wins?(players_hand, dealers_hand)
+        user.purse += ante * 2 + play * 2
 
-
-
-
-
+        puts "Current Purse: $#{user.purse} \n\n"
+        puts "Your Hand: \n\n"
+        user.show_hand(players_hand)
+        puts "\n"
+        puts "Dealers Hand: \n\n"
+        user.show_hand(dealers_hand)
+        puts "\n"
+        puts "Congrats"
+    else
+        puts "Current Purse: $#{user.purse} \n\n"
+        puts "Your Hand: \n\n"
+        user.show_hand(players_hand)
+        puts "\n"
+        puts "Dealers Hand: \n\n"
+        user.show_hand(dealers_hand)
+        puts "\n"
+        puts "Ah, too bad buddy"
+    end
+end
