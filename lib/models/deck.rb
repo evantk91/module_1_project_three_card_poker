@@ -3,7 +3,7 @@ require 'open-uri'
 require 'json'
 require 'pry'
 
-class Hand
+class Deck
     attr_reader :url
 
     def initialize url
@@ -44,15 +44,15 @@ def is_straight?(hand_array)
     hand_array.map do |card|
         case card[0]
         when 'J'
-            card_value << 11
+            card_values << 11
         when 'Q'
-            card_value << 12
+            card_values << 12
         when 'K'
-            card_value << 13
+            card_values << 13
         when 'A'
-            card_value << 14
+            card_values << 14
         else 
-            card_value << card[0].to_i
+            card_values << card[0].to_i
         end
     end
 
