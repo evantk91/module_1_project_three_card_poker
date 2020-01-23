@@ -1,3 +1,5 @@
+#rough draft of what is in console.rb
+
 require_relative '../config/environment'
 require 'pry'
 require 'open-uri'
@@ -34,6 +36,7 @@ system "clear"
 #code for dealing player_hand and dealer_hand
 deck = Deck.new('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
 deck_id = deck.deck_id
+
 
 players_hand = deck.deal_from_deck(deck_id);
 dealers_hand = deck.deal_from_deck(deck_id);
@@ -100,6 +103,7 @@ end
         #else puts "Draw!"
         #end
     #end
+
 
 
 
