@@ -1,7 +1,3 @@
 development:
   adapter: 'sqlite3'
-<<<<<<< HEAD
-  database: 'db/3_card_poker.db'
-=======
   database: 'db/poker.db'
->>>>>>> 1d6f35cdfbf396ccf8ca126153d72ce46b175bd8
