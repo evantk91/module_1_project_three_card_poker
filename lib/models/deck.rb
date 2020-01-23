@@ -195,16 +195,26 @@ def player_wins?(p_hand, d_hand)
     #compare hand types
     if p_hand_value > d_hand_value
         return true
-    elsif p_hand_value < d_hand_value
+    end
+
+    if p_hand_value < d_hand_value
         return false
     end
 
     #if both dealer and player have same type of hand, compare hand value
     if p_hand_value == d_hand_value
-        if p_hand_type[1] > d_hand_type[1]
-            return true
-        else 
-            return false
+        if p_hand_type == "Pair"
+            if hand_value(p_hand)[2] > hand_value(d_hand)[2]
+                return true
+            else 
+                return false
+            end
+        else
+            if hand_value(p_hand)[1] > hand_value(d_hand)[1]
+                return true
+            else 
+                return false
+            end
         end
     end
     
