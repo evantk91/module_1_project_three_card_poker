@@ -158,65 +158,74 @@ def hand_value(hand_array)
 
 end
 
-def compare_hands(p_hand, d_hand)
-    p_hand_type = hand_value(p_hand)
-    d_hand_type = hand_value(d_hand)
-    if p_hand_type[0] == "No Pair"
+def player_wins?(p_hand, d_hand)
+
+    #determine hand type
+    p_hand_type = hand_value(p_hand)[0]
+    d_hand_type = hand_value(d_hand)[0]
+
+    if p_hand_type == "No Pair"
         p_hand_value = 1
-    elsif p_hand_type[0] == "Pair"
+    elsif p_hand_type == "Pair"
         p_hand_value = 2
-    elsif p_hand_type[0] == "Straight"
+    elsif p_hand_type == "Straight"
         p_hand_value = 3
-    elsif p_hand_type[0] == "Flush"
+    elsif p_hand_type == "Flush"
         p_hand_value = 4
-    elsif p_hand_type[0] == "Three of a Kind"
+    elsif p_hand_type == "Three of a Kind"
         p_hand_value = 5
-    elsif p_hand_type[0] == "Straight Flush"
+    elsif p_hand_type == "Straight Flush"
         p_hand_value = 6
     end
-    if d_hand_type[0] == "No Pair"
+
+    if d_hand_type == "No Pair"
         d_hand_value = 1
-    elsif d_hand_type[0] == "Pair"
+    elsif d_hand_type == "Pair"
         d_hand_value = 2
-    elsif d_hand_type[0] == "Straight"
+    elsif d_hand_type == "Straight"
         d_hand_value = 3
-    elsif d_hand_type[0] == "Flush"
+    elsif d_hand_type == "Flush"
         d_hand_value = 4
-    elsif d_hand_type[0] == "Three of a Kind"
+    elsif d_hand_type == "Three of a Kind"
         d_hand_value = 5
-    elsif d_hand_type[0] == "Straight Flush"
+    elsif d_hand_type == "Straight Flush"
         d_hand_value = 6
     end
+
+    #compare hand types
     if p_hand_value > d_hand_value
-        winner = "player"
+        return true
     elsif p_hand_value < d_hand_value
-        winner = "dealer"
-    else
+        return false
+    end
+
+    #if both dealer and player have same type of hand, compare hand value
+    if p_hand_value == d_hand_value
         if p_hand_type[1] > d_hand_type[1]
-            winner = "player"
-        elsif p_hand_type[1] < d_hand_type[1]
-            winner = "dealer"
-        else
-            puts "Draw! No one wins!"
+            return true
+        else 
+            return false
         end
     end
+    
 end
 
-def pair_plus_payout(pair_plus)
-    if pair_plus > 0
-        if p_hand_type[0] == "Flush"
-            payout_multiplier = 4
-        elsif p_hand_type[0] == "Straight"
-            payout_multiplier = 5
-        elsif p_hand_type[0] == "Three of a Kind"
-            payout_multiplier = 30
-        elsif p_hand_type[0] == "Straight Flush"
-            payout_multiplier = 40
-        end
-        payout = pair_plus * payout_multiplier
+def pair_plus_payout(bet, hand_type)
+    
+    case hand_type
+    when "Flush"
+        payout = 5 * bet
+    when "Straight"
+        payout = 6 * bet
+    when "Three of a Kind"
+        payout = 31 * bet
+    when "Straight Flush"
+        payout = 41 * bet
+    when "Pair"
+        payout = 2 * bet
     else
-        puts "No pair plus bet made!"
         payout = 0
     end
+    
     payout
 end
