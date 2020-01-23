@@ -117,20 +117,43 @@ def is_pair?(hand_array)
     end
 end
 
+def pair_info(hand_array)
+    #sort hand values
+    sorted_values = sorted_hand_values(hand_array)
+
+    #return pair value and other card value
+    if sorted_values[0] == sorted_values[1]
+        pair_value = sorted_values[0]
+        other_card = sorted_values[2]
+        return[pair_value, other_card]
+    else sorted_values[1] == sorted_values[2]
+        pair_value = sorted_values[1]
+        other_card = sorted_values[0]
+        return[pair_value, other_card]
+    end
+end
+
 def hand_value(hand_array)
 
+    #initialize hand type and determine high card
     hand_type = ''
     high_card = sorted_hand_values(hand_array)[2]
 
-#    if is_flush(hand_array)
+    #return hand type and appropriate information
+    if is_straight_flush?(hand_array)
+        return ["Straight Flush", high_card]
+    elsif is_flush?(hand_array)
+        return ["Flush", high_card]
+    elsif is_straight?(hand_array)
+        return ["Straight", high_card]
+    elsif is_three_of_a_kind?(hand_array)
+        return ["Three of a Kind", high_card]
+    elsif is_pair?(hand_array)
+       pair_value = pair_info(hand_array)[0]
+       other_card = pair_info(hand_array)[1]
+       return ["Pair", pair_value, other_card]
+    else
+        return ["No Pair", high_card]
+    end
 
-
-
-
-
-    
-
-#    suits
 end
-
-#binding.pry
