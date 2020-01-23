@@ -9,7 +9,7 @@ system "clear"
 puts "Hello, whats you name?"
 username = gets.chomp
 initial_purse = 1000
-user = User.new(username, initial_purse) 
+user = User.create(name: username, purse: initial_purse) 
 
 #initialize user environment
 user.welcome
@@ -37,8 +37,8 @@ system "clear"
 deck = Deck.new('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
 deck_id = deck.deck_id
 
-players_hand = ['6S', '6D', '3H']#deck.deal_from_deck(deck_id)
-dealers_hand = ['6C', '6H', 'KD']#deck.deal_from_deck(deck_id)
+players_hand = deck.deal_from_deck(deck_id)
+dealers_hand = deck.deal_from_deck(deck_id)
 
 players_hand_type = hand_value(players_hand)[0]
 pp_payout = pair_plus_payout(pair_plus_bet, players_hand_type)
@@ -85,6 +85,6 @@ elsif play_fold == 'p'
         puts "Dealers Hand: \n\n"
         user.show_hand(dealers_hand)
         puts "\n"
-        puts "Ah, too bad buddy"
+        puts "Ah, too bad buddy, you lose!"
     end
 end

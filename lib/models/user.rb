@@ -1,10 +1,10 @@
-class User
-    attr_accessor :name, :purse
+class User < ActiveRecord::Base
+    # attr_accessor :name, :purse
 
-    def initialize name, purse
-        @name = name
-        @purse = purse
-    end
+    # def initialize name, purse
+    #     @name = name
+    #     @purse = purse
+    # end
 
     def welcome
         system "clear"
