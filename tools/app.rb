@@ -45,6 +45,11 @@ puts "\n"
 puts "Would you like to play or fold (type p for play, f for fold)"
 play_fold = gets.chomp.downcase
 
+if play_fold == 'f'
+    
+elsif play_fold == 'p'
+
+end
 
 #play_res = gets.chomp.downcase
 #if play_res == 'fold'
