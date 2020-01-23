@@ -3,7 +3,7 @@ require 'open-uri'
 require 'json'
 require 'pry'
 
-class Hand
+class Deck
     attr_reader :url
 
     def initialize url
@@ -37,26 +37,35 @@ class Hand
 
 end
 
-def is_straight?(hand_array)
-
+def sorted_hand_values(hand_array)
     #store and convert card values into integers for comparison
     card_values = []
     hand_array.map do |card|
         case card[0]
+        when '0'
+            card_values << 10
         when 'J'
-            card_value << 11
+            card_values << 11
         when 'Q'
-            card_value << 12
+            card_values << 12
         when 'K'
-            card_value << 13
+            card_values << 13
         when 'A'
-            card_value << 14
+            card_values << 14
         else 
-            card_value << card[0].to_i
+            card_values << card[0].to_i
         end
     end
-
+    
+    #sort values for comparison
     sorted_values = card_values.sort
+end
+
+def is_straight?(hand_array)
+    #sort hand values
+    sorted_values = sorted_hand_values(hand_array)
+
+    #determine if cards make up a straight
     if sorted_values[0] == sorted_values[1] - 1 && sorted_values[1] == sorted_values[2] - 1
         return true
     else
@@ -64,21 +73,64 @@ def is_straight?(hand_array)
     end
 end
 
-def is_flush(suits)
+def is_flush?(hand_array)
+
+    #store the suits of the cards
+    suits = []
+    suits = hand_array.map {|card| card[card.length-1]}
+
+    #determine if cards make up a flush
     flushes = [['S','S', 'S'], ['C', 'C', 'C'], ['H', 'H', 'H'], ['D', 'D', 'D']]
     flushes.include?(suits)
 end
 
-#def is_straight_flush()
+def is_straight_flush?(hand_array)
+    #check for straight and check for flush
+    if is_straight?(hand_array) && is_flush?(hand_array)
+        return true
+    else
+        return false
+    end
+end
 
-#def hand_value(hand_array)
+def is_three_of_a_kind?(hand_array)
+    #sort hand values
+    sorted_values = sorted_hand_values(hand_array)
 
- #   card_value = []
- #   suits = []
+    #determine if cards make up a three of a kind
+    if sorted_values.uniq.length == 1
+        return true
+    else
+        return false
+    end
+end
+
+def is_pair?(hand_array)
+    #sort hand values
+    sorted_values = sorted_hand_values(hand_array)
+
+    #determine if two cards make up a pair
+    if sorted_values[0] == sorted_values[1] || sorted_values[1] == sorted_values[2]
+        return true
+    else
+        return false
+    end
+end
+
+def hand_value(hand_array)
+
+    hand_type = ''
+    high_card = sorted_hand_values(hand_array)[2]
+
+#    if is_flush(hand_array)
+
+
+
+
 
     
 
-  #  suits
-#end
+#    suits
+end
 
 #binding.pry
