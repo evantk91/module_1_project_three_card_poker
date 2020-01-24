@@ -26,3 +26,5 @@ Evan Greer, Jeremy Gray
 Acknowledgments:
 
 Deck of Cards API (http://deckofcardsapi.com/)
+
+![]("./demo.gif")
