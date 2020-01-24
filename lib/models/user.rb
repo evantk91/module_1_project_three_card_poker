@@ -1,10 +1,4 @@
 class User < ActiveRecord::Base
-    # attr_accessor :name, :purse
-
-    # def initialize name, purse
-    #     @name = name
-    #     @purse = purse
-    # end
 
     def welcome
         system "clear"
@@ -30,24 +24,30 @@ class User < ActiveRecord::Base
 
         #displays welcome message
         system "clear"
-        puts "Welcome to 3 Card Poker #{self.name}!"
-        puts "I promise we wont take your money"
+        puts "Welcome to 3 Card Poker #{self.name}!\n\n"
+        puts "I promise we won't take your money!! ;)"
         puts " "
     end
 
     def view_rules?
-        puts "Would you like to read the rules first? Y/N"
-        rules_response = gets.chomp
+        puts "Would you like to read the rules first? y/n"
+        rules_response = gets.chomp.downcase
 
-        if rules_response == 'Y'
-            rules = open("https://www.table-games-online.com/3-card-poker/rules.html")
+        if rules_response == 'y'
+            system "clear"
+            puts "-place an ante to see your hand\n"
+            puts "-place an optional pair plus bet for the pair plus bonus\n"
+            puts "(pair: 1 to 1, flush: 4 to 1, straight: 5 to 1, three of a kind: 30 to 1, straight flush: 40 to 1)\n"
+            puts "-you have the option to play or fold based on if you think you will beat the dealer\n"
+            puts "-pair plus pays out regardless\n"
+            puts "-if you beat the dealer, you win 1 to 1 on the ante and play bet.\n"
+            puts "-if the dealer, wins you get nothing!!"
         end
         puts " "
-        sleep(1)
     end
 
     def show_purse
-        puts "Your current purse is #{self.purse}"
+        puts "Your current purse is $#{self.purse}"
     end
 
     def get_ante(purse)
@@ -62,10 +62,6 @@ class User < ActiveRecord::Base
         if ante < 0
             puts "You can't bet negative money!"
             self.get_ante(purse)
-        end
-
-        if ante == 0
-            #display end of game
         end
 
         ante
@@ -98,6 +94,10 @@ class User < ActiveRecord::Base
         self.purse -= ante
         puts " "
 
+        if ante == 0
+            return ante
+        end
+
         #requests the self's pair plus bet
         pair_plus_bet = self.get_pair_plus_bet(self.purse)
         self.purse -= pair_plus_bet
@@ -109,8 +109,8 @@ class User < ActiveRecord::Base
         deck = Deck.new('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
         deck_id = deck.deck_id
 
-        players_hand = ["8D", "8H", "3C"]#deck.deal_from_deck(deck_id)
-        dealers_hand = ["8C", "8S", "4S"]#deck.deal_from_deck(deck_id)
+        players_hand = deck.deal_from_deck(deck_id)
+        dealers_hand = deck.deal_from_deck(deck_id)
 
         players_hand_type = hand_value(players_hand)[0]
         pp_payout = pair_plus_payout(pair_plus_bet, players_hand_type)
@@ -123,13 +123,17 @@ class User < ActiveRecord::Base
         play_fold = gets.chomp.downcase
         system "clear"
 
+        #binding.pry
+
         if play_fold == 'f'
             self.purse += pp_payout
-
+            
             puts "Current Purse: $#{self.purse} \n\n"
             puts "Your Hand: \n\n"
             self.show_hand(players_hand)
             puts "\n"
+            puts "Press enter to continue..."
+            gets.chomp
 
             return self.purse
 
@@ -150,7 +154,9 @@ class User < ActiveRecord::Base
                 puts "Dealers Hand: \n\n"
                 self.show_hand(dealers_hand)
                 puts "\n"
-                puts "Congrats"
+                puts "Congrats!! :)\n\n"
+                puts "Press enter to continue..."
+                gets.chomp
             else
                 puts "Current Purse: $#{self.purse} \n\n"
                 puts "Your Hand: \n\n"
@@ -159,7 +165,9 @@ class User < ActiveRecord::Base
                 puts "Dealers Hand: \n\n"
                 self.show_hand(dealers_hand)
                 puts "\n"
-                puts "Ah, too bad buddy, you lose!"
+                puts "Ah, too bad buddy, you lose! :(\n\n"
+                puts "Press enter to continue..."
+                gets.chomp
             end
 
             return self.purse
