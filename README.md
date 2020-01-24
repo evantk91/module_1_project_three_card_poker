@@ -4,7 +4,9 @@ Description:
 
 Application that simulates three card poker. Allows user to play as many rounds as they'd like or until money runs out. Persists final user purse values to leaderboard table. Then lets user decide to remove their game history from leaderboard and/or reset leaderboard.
 
-How to start game: After forking & cloning, run ruby runner.rb in project root directory
+How to start game: 
+
+After forking & cloning, run ruby runner.rb in project root directory
 
 Three card poker rules:
 1) place an ante to see your hand
