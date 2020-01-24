@@ -6,17 +6,17 @@ Application that simulates three card poker. Allows user to play as many rounds 
 
 Prerequisites/Gems:
 
-activerecord
-sinatra-activerecord
-sqlite3 
-rake
-require_all
+activerecord,
+sinatra-activerecord,
+sqlite3, 
+rake,
+require_all,
 rest-client
 
 Built With:
 
-Ruby
-ActiveRecord
+Ruby,
+ActiveRecord,
 Sqlite3
 
 Authors:
