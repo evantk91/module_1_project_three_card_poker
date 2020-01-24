@@ -20,5 +20,14 @@ user.show_purse
 puts " "
 
 #first round
-user.run_round
+flag = user.run_round
+
+while flag != 0
+    system "clear"
+    flag = user.run_round
+end
+
+user.update(purse: user.purse)
+
+puts "your final purse: $#{user.purse}"
 
