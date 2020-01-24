@@ -18,6 +18,7 @@ Three card poker rules:
 4) pair plus pays out regardless of a fold
 5) if you beat the dealer, you win 1 to 1 on the ante and play bet
 6) if the dealer wins, you lose the ante and the play
+7) Cards will be given in format like "KH" (CardSuit) which corresponds to "King of Hearts," and "0D" the "0" refers to the "10" card, so this specifc card would correspond with "10 of Diamonds".
 
 Prerequisites/Gems:
 
