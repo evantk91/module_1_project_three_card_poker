@@ -6,7 +6,10 @@ Application that simulates three card poker. Allows user to play as many rounds 
 
 How to start game: 
 
-After forking & cloning, run ruby runner.rb in project root directory
+After forking & cloning, run the following in terminal while in project root directory:
+  'bundle install'
+  'rake db:migrate'
+  'ruby runner.rb'
 
 Three card poker rules:
 1) place an ante to see your hand
@@ -27,9 +30,9 @@ Prerequisites/Gems:
 
 Built With:
 
-  Ruby,
-  ActiveRecord,
-  Sqlite3
+  Ruby(2.6.1),
+  ActiveRecord(6.0),
+  Sqlite3(1.4)
 
 Authors:
 
