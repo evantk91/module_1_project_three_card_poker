@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
             puts "-you have the option to play or fold based on if you think you will beat the dealer\n"
             puts "-pair plus pays out regardless\n"
             puts "-if you beat the dealer, you win 1 to 1 on the ante and play bet.\n"
-            puts "-if the dealer, wins you get nothing!!"
+            puts "-if the dealer wins, you get nothing!!"
         end
         puts " "
     end
