@@ -27,4 +27,4 @@ Acknowledgments:
 
 Deck of Cards API (http://deckofcardsapi.com/)
 
-![]("demo.gif")
+![](demo.gif)
