@@ -4,7 +4,7 @@ Description:
 
 Application that simulates three card poker. Allows user to play as many rounds as they'd like or until money runs out. Persists final user purse values to leaderboard table. Then lets user decide to remove their game history from leaderboard and/or reset leaderboard.
 
-Instructions for running: run ruby tools/runner.rb
+Instructions for running: run ruby runner.rb in project root directory
 
 Three card poker rules:
 1) place an ante to see your hand
@@ -16,25 +16,25 @@ Three card poker rules:
 
 Prerequisites/Gems:
 
-activerecord,
-sinatra-activerecord,
-sqlite3, 
-rake,
-require_all,
-rest-client
+  activerecord,
+  sinatra-activerecord,
+  sqlite3, 
+  rake,
+  require_all,
+  rest-client
 
 Built With:
 
-Ruby,
-ActiveRecord,
-Sqlite3
+  Ruby,
+  ActiveRecord,
+  Sqlite3
 
 Authors:
 
-Evan Greer, Jeremy Gray
+  Evan Greer, Jeremy Gray
 
 Acknowledgments:
 
-Deck of Cards API (http://deckofcardsapi.com/)
+  Deck of Cards API (http://deckofcardsapi.com/)
 
 ![](demo.gif)
