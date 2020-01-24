@@ -9,8 +9,33 @@ puts "Hello, what\'s your name?"
 username = gets.chomp
 initial_purse = 1000
 user = User.create(name: username, purse: initial_purse) 
+system "clear"
+puts "
+_|_|_|_|_|  _|                                      
+    _|      _|_|_|    _|  _|_|    _|_|      _|_|    
+    _|      _|    _|  _|_|      _|_|_|_|  _|_|_|_|  
+    _|      _|    _|  _|        _|        _|        
+    _|      _|    _|  _|          _|_|_|    _|_|_|  
+                                                
+                                                
+                                    
+_|_|_|                              _|  
+_|          _|_|_|  _|  _|_|    _|_|_|  
+_|        _|    _|  _|_|      _|    _|  
+_|        _|    _|  _|        _|    _|  
+_|_|_|    _|_|_|  _|          _|_|_|  
+                                    
+                                    
+                                              
+_|_|_|              _|                            
+_|    _|    _|_|    _|  _|      _|_|    _|  _|_|  
+_|_|_|    _|    _|  _|_|      _|_|_|_|  _|_|      
+_|        _|    _|  _|  _|    _|        _|        
+_|          _|_|    _|    _|    _|_|_|  _|        
+                                       "
+                                       
 
-#initialize user environment
+sleep (3)                                       #initialize user environment
 user.welcome
 
 #asks user if they would like to see the rules
